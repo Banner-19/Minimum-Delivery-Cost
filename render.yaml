@@ -1,0 +1,17 @@
+services:
+  - type: web # Specifies this is a web service
+    name: delivery-cost-api # Choose a name for your service
+    env: python # Specifies the runtime environment
+    pythonVersion: "3.9" # Specify your desired Python version (e.g., 3.9, 3.10, 3.11)
+    buildCommand: "pip install -r requirements.txt" # How to install dependencies
+    startCommand: "gunicorn --bind 0.0.0.0:$PORT app:app" # How to start the production server
+    # $PORT is automatically injected by Render
+    # app:app means: find the Flask object named 'app' inside the file 'app.py'
+    # Optional: Specify a plan (e.g., free tier)
+    plan: free
+    # Optional: Define environment variables if needed (none for this app)
+    # envVars:
+    #  - key: EXAMPLE_VAR
+    #    value: example_value
+    # Optional: Configure health check path (defaults to '/')
+    healthCheckPath: /
